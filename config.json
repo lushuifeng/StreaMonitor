@@ -3,16 +3,16 @@
         "site": "StripChat",
         "username": "oxo_yuna_oxo",
         "running": true,
-        "country": "JP",
-        "gender": 3,
+        "country": null,
+        "gender": null,
         "room_id": "170884951"
     },
     {
         "site": "StripChat",
         "username": "meg_0901",
         "running": true,
-        "country": "JP",
-        "gender": 1,
+        "country": null,
+        "gender": null,
         "room_id": "153986136"
     },
     {
@@ -20,23 +20,23 @@
         "username": "Yuuuuuly",
         "running": true,
         "country": null,
-        "gender": 1,
+        "gender": null,
         "room_id": "142792849"
     },
     {
         "site": "StripChat",
         "username": "Xiaogou_bb888",
         "running": true,
-        "country": "VN",
-        "gender": 1,
+        "country": null,
+        "gender": null,
         "room_id": "152141409"
     },
     {
         "site": "StripChat",
         "username": "Sena_S2",
         "running": true,
-        "country": "JP",
-        "gender": 1,
+        "country": null,
+        "gender": null,
         "room_id": "151891333"
     },
     {
@@ -44,7 +44,7 @@
         "username": "Butterbear",
         "running": true,
         "country": null,
-        "gender": 1,
+        "gender": null,
         "room_id": "228552052"
     },
     {
@@ -57,26 +57,18 @@
     },
     {
         "site": "StripChat",
-        "username": "Luna_baobeii",
-        "running": true,
-        "country": null,
-        "gender": null,
-        "room_id": "255210915"
-    },
-    {
-        "site": "StripChat",
         "username": "Marui-",
         "running": true,
         "country": null,
-        "gender": 1,
+        "gender": null,
         "room_id": "145171399"
     },
     {
         "site": "StripChat",
         "username": "_Aria_Moonie",
         "running": true,
-        "country": "VN",
-        "gender": 1,
+        "country": null,
+        "gender": null,
         "room_id": "222467918"
     },
     {
@@ -84,7 +76,7 @@
         "username": "ChimiAB",
         "running": true,
         "country": null,
-        "gender": 1,
+        "gender": null,
         "room_id": "249327790"
     },
     {
@@ -92,7 +84,7 @@
         "username": "Abiutmm",
         "running": true,
         "country": null,
-        "gender": 1,
+        "gender": null,
         "room_id": "225074109"
     },
     {
@@ -100,7 +92,7 @@
         "username": "bejeni-sweet",
         "running": true,
         "country": null,
-        "gender": 1,
+        "gender": null,
         "room_id": "89864150"
     },
     {
@@ -108,7 +100,7 @@
         "username": "Littlelove66",
         "running": true,
         "country": null,
-        "gender": 1,
+        "gender": null,
         "room_id": "207932011"
     },
     {
