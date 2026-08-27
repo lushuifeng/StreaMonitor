@@ -70,10 +70,10 @@ WEBSERVER_PORT = env.int("STRMNTR_PORT", 5000)
 WEBSERVER_SKIN = env.str("STRMNTR_SKIN", "truck-kun")
 
 # set frequency in seconds of how often the streamer list will update
-WEB_LIST_FREQUENCY = env.int("STRMNTR_LIST_FREQ", 30)
+WEB_LIST_FREQUENCY = env.int("STRMNTR_LIST_FREQ", 120)
 
 # set frequency in seconds of how often the streamer's status will update on the recording page
-WEB_STATUS_FREQUENCY = env.int("STRMNTR_STATUS_FREQ", 5)
+WEB_STATUS_FREQUENCY = env.int("STRMNTR_STATUS_FREQ", 20)
 
 # set theater_mode
 WEB_THEATER_MODE = env.bool("STRMNTR_THEATER_MODE", False)

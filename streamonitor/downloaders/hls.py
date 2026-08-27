@@ -2,6 +2,8 @@ import m3u8
 import os
 import subprocess
 from threading import Thread
+
+import pycurl_requests.exceptions
 from ffmpy import FFmpeg, FFRuntimeError
 from time import sleep
 from parameters import DEBUG, CONTAINER, SEGMENT_TIME, FFMPEG_PATH

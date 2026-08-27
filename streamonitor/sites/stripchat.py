@@ -11,6 +11,10 @@ from streamonitor.bot import RoomIdBot
 from streamonitor.downloaders.hls import getVideoNativeHLS
 from streamonitor.enums import Status, Gender, COUNTRIES
 
+proxies = {
+    'http': 'http://127.0.0.1:7890',
+    'https': 'http://127.0.0.1:7890',
+}
 
 class StripChat(RoomIdBot):
     site = 'StripChat'
@@ -19,7 +23,12 @@ class StripChat(RoomIdBot):
     bulk_update = True
     _static_data = None
     _mouflon_cache_filename = 'stripchat_mouflon_keys.json'
-    _mouflon_keys: dict = None
+    # https://github.com/lossless1024/StreaMonitor/pull/268/files
+    _mouflon_keys: dict = {
+        "Zeechoej4aleeshi": "ubahjae7goPoodi6",
+        "Zokee2OhPh9kugh4": "Quean4cai9boJa5a",
+        "Ook7quaiNgiyuhai": "EQueeGh2kaewa3ch",
+    }
     _cached_keys: dict[str, bytes] = None
     _PRIVATE_STATUSES = frozenset(["private", "groupShow", "p2p", "virtualPrivate", "p2pVoice"])
     _OFFLINE_STATUSES = frozenset(["off", "idle"])
@@ -56,10 +65,81 @@ class StripChat(RoomIdBot):
     @classmethod
     def getInitialData(cls):
         session = requests.Session()
-        r = session.get('https://stripchat.com/api/front/v3/config/static', headers=cls.headers)
+        r = session.get('https://zh.stripchat.com/api/front/v3/config/static', proxies=proxies, headers=cls.headers)
         if r.status_code != 200:
             raise Exception("Failed to fetch static data from StripChat")
         StripChat._static_data = r.json().get('static')
+        #
+        # mmp_origin = StripChat._static_data['featureSettings']['MMPExternalUnitedSourceOrigin']
+        # mmp_version = StripChat._static_data['featuresV2']['playerModuleExternalLoading']['mmpVersion']
+        # if mmp_version.startswith('v'):
+        #     mmp_base = f"{mmp_origin}/{mmp_version}"
+        # else:
+        #     mmp_base = f"{mmp_origin}/v{mmp_version}"
+        #
+        # r = session.get(f"{mmp_base}/main.js", proxies=proxies, headers=cls.headers)
+        # if r.status_code != 200:
+        #     raise Exception("Failed to fetch main.js from StripChat")
+        # StripChat._main_js_data = r.text
+        #
+        # # Find Doppio JS file
+        # doppio_js_name = None
+        #
+        # # Try direct require pattern first (legacy)
+        # DOPPIO_REQUIRE_PATTERN = re.compile(r'require\(["\']\./(Doppio[^"\']+\.js)["\']\)')
+        # DOPPIO_CHUNK_PATTERN = re.compile(r'n\.e\((\d+)\)\]\)\.then\(n\.bind\(n,\d+\)\)\)\.DoppioWrapper')
+        # CHUNK_HASH_PATTERN = re.compile(r'n\.u=e=>"chunk-"\+\{([^}]+)\}\[e\]\+"\.js"')
+        # DOPPIO_INDEX_PATTERN = re.compile(r'([0-9]+):"Doppio"')
+        # if match := DOPPIO_REQUIRE_PATTERN.search(StripChat._main_js_data):
+        #     doppio_js_name = match[1]
+        # # Try new webpack chunk pattern: n.e(184)...DoppioWrapper
+        # elif match := DOPPIO_CHUNK_PATTERN.search(StripChat._main_js_data):
+        #     chunk_id = match[1]
+        #     # Find the chunk hash mapping
+        #     if hash_match := CHUNK_HASH_PATTERN.search(StripChat._main_js_data):
+        #         chunk_mapping = hash_match[1]
+        #         # Parse the mapping to find the hash for our chunk_id
+        #         # Format: 149:"hash1",184:"hash2",...
+        #         for mapping in chunk_mapping.split(','):
+        #             if ':' in mapping:
+        #                 cid, chash = mapping.split(':', 1)
+        #                 if cid.strip() == chunk_id:
+        #                     # Remove quotes from hash
+        #                     chash = chash.strip().strip('"')
+        #                     doppio_js_name = f"chunk-{chash}.js"
+        #                     break
+        # elif match := DOPPIO_INDEX_PATTERN.search(StripChat._main_js_data):
+        #     idx = match[1]
+        #     # Look for hash in various formats
+        #     for pattern in [
+        #         rf'{idx}:\\"([a-zA-Z0-9]{{20}})\\"',
+        #         rf'{idx}:"([a-zA-Z0-9]{{20}})"',
+        #         rf'"{idx}":"([a-zA-Z0-9]{{20}})"',
+        #     ]:
+        #         if hash_match := re.search(pattern, StripChat._main_js_data):
+        #             doppio_js_name = f"chunk-Doppio-{hash_match[1]}.js"
+        #             break
+        #
+        # if not doppio_js_name:
+        #     raise Exception("Could not find Doppio JS file in main.js")
+        #
+        # r = session.get(f"{mmp_base}/{doppio_js_name}", proxies=proxies, headers=cls.headers)
+        # if r.status_code != 200:
+        #     raise Exception("Failed to fetch doppio.js from StripChat")
+        # StripChat._doppio_js_data = r.text
+
+        # r = session.get(f"{mmp_base}/main.js", proxies=proxies, headers=cls.headers)
+        # if r.status_code != 200:
+        #     raise Exception("Failed to fetch main.js from StripChat")
+        # StripChat._main_js_data = r.content.decode('utf-8')
+        #
+        # doppio_js_index = re.findall('([0-9]+):"Doppio"', StripChat._main_js_data)[0]
+        # doppio_js_hash = re.findall(f'{doppio_js_index}:\\"([a-zA-Z0-9]{{20}})\\"', StripChat._main_js_data)[0]
+        #
+        # r = session.get(f"{mmp_base}/chunk-Doppio-{doppio_js_hash}.js", proxies=proxies, headers=cls.headers)
+        # if r.status_code != 200:
+        #     raise Exception("Failed to fetch doppio.js from StripChat")
+        # StripChat._doppio_js_data = r.content.decode('utf-8')
 
     @classmethod
     def m3u_decoder(cls, content):
@@ -127,7 +207,7 @@ class StripChat(RoomIdBot):
         return None, None, None
 
     def getWebsiteURL(self):
-        return "https://stripchat.com/" + self.username
+        return "https://zh.stripchat.com/" + self.username
 
     def getVideoUrl(self):
         return self.getWantedResolutionPlaylist(None)
@@ -139,12 +219,13 @@ class StripChat(RoomIdBot):
                 vr='_vr' if self.vr else '',
                 auto='_auto' if not self.vr else ''
             )
-        result = self.session.get(url, headers=self.headers, cookies=self.cookies)
+        result = self.session.get(url, proxies=proxies, headers=self.headers, cookies=self.cookies)
         m3u8_doc = result.content.decode("utf-8")
         psch, pkey, pdkey = StripChat._getMouflonFromM3U(m3u8_doc)
         if pdkey is None:
             self.log(f'Failed to get mouflon decryption key')
             return []
+        self.log(f"Extracted key {psch}, {pkey}, {pdkey}")
         variants = super().getPlaylistVariants(m3u_data=m3u8_doc)
         return [variant | {'url': f'{variant["url"]}{"&" if "?" in variant["url"] else "?"}psch={psch}&pkey={pkey}'}
                 for variant in variants]
@@ -157,7 +238,9 @@ class StripChat(RoomIdBot):
 
     def _getStatusData(self, username):
         r = self.session.get(
-            f'https://stripchat.com/api/front/v2/models/username/{username}/cam?uniq={StripChat.uniq()}',
+            # f'https://zh.stripchat.com/api/front/v2/models/username/{username}/cam?uniq={StripChat.uniq()}',
+            f'https://zh.stripchat.com/api/front/users/user-ids/{username}',
+            proxies=proxies,
             headers=self.headers
         )
 
@@ -189,17 +272,19 @@ class StripChat(RoomIdBot):
             return self.room_id
 
         data = self._getStatusData(username)
-        if username == self.username:
-            self._update_lastInfo(data)
+        # if username == self.username:
+        #     self._update_lastInfo(data)
+        #
+        # if 'user' not in data:
+        #     return None
+        # if 'user' not in data['user']:
+        #     return None
+        # if 'id' not in data['user']['user']:
+        #     return None
 
-        if 'user' not in data:
-            return None
-        if 'user' not in data['user']:
-            return None
-        if 'id' not in data['user']['user']:
-            return None
+        # return str(data['user']['user']['id'])
 
-        return str(data['user']['user']['id'])
+        return str(data['id'])
 
     def getStatus(self):
         data = self._getStatusData(self.username)
@@ -246,14 +331,14 @@ class StripChat(RoomIdBot):
             if streamer.room_id:
                 model_ids[streamer.room_id] = streamer
 
-        base_url = 'https://stripchat.com/api/front/models/list?'
+        base_url = 'https://zh.stripchat.com/api/front/models/list?'
         batch_num = 100
         data_map = {}
         model_id_list = list(model_ids)
         for _batch_ids in [model_id_list[i:i+batch_num] for i in range(0, len(model_id_list), batch_num)]:
             session = requests.Session()
             session.headers.update(cls.headers)
-            r = session.get(base_url + '&'.join(f'modelIds[]={model_id}' for model_id in _batch_ids), timeout=10)
+            r = session.get(base_url + '&'.join(f'modelIds[]={model_id}' for model_id in _batch_ids), proxies=proxies, timeout=10)
 
             try:
                 data = r.json()
