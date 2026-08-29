@@ -283,7 +283,7 @@ class StripChat(RoomIdBot):
         if username == self.username and self.room_id is not None:
             return self.room_id
 
-        r = self.session.get(f'https://hu.stripchat.com/api/front/users/user-ids/{username}', headers=self.headers)
+        r = self.session.get(f'https://zh.stripchat.com/api/front/users/user-ids/{username}', headers=self.headers, proxies=proxies)
         try:
             data = r.json()
             _id = str(data['id']) if data.get('id') else None

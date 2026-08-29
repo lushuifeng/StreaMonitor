@@ -3,16 +3,16 @@
         "site": "StripChat",
         "username": "oxo_yuna_oxo",
         "running": true,
-        "country": null,
-        "gender": null,
+        "country": "JP",
+        "gender": 3,
         "room_id": "170884951"
     },
     {
         "site": "StripChat",
         "username": "meg_0901",
         "running": true,
-        "country": null,
-        "gender": null,
+        "country": "JP",
+        "gender": 1,
         "room_id": "153986136"
     },
     {
@@ -20,23 +20,23 @@
         "username": "Yuuuuuly",
         "running": true,
         "country": null,
-        "gender": null,
+        "gender": 1,
         "room_id": "142792849"
     },
     {
         "site": "StripChat",
         "username": "Xiaogou_bb888",
         "running": true,
-        "country": null,
-        "gender": null,
+        "country": "VN",
+        "gender": 1,
         "room_id": "152141409"
     },
     {
         "site": "StripChat",
         "username": "Sena_S2",
         "running": true,
-        "country": null,
-        "gender": null,
+        "country": "JP",
+        "gender": 1,
         "room_id": "151891333"
     },
     {
@@ -44,7 +44,7 @@
         "username": "Butterbear",
         "running": true,
         "country": null,
-        "gender": null,
+        "gender": 1,
         "room_id": "228552052"
     },
     {
@@ -60,15 +60,15 @@
         "username": "Marui-",
         "running": true,
         "country": null,
-        "gender": null,
+        "gender": 1,
         "room_id": "145171399"
     },
     {
         "site": "StripChat",
         "username": "_Aria_Moonie",
         "running": true,
-        "country": null,
-        "gender": null,
+        "country": "VN",
+        "gender": 1,
         "room_id": "222467918"
     },
     {
@@ -76,7 +76,7 @@
         "username": "ChimiAB",
         "running": true,
         "country": null,
-        "gender": null,
+        "gender": 1,
         "room_id": "249327790"
     },
     {
@@ -84,23 +84,15 @@
         "username": "Abiutmm",
         "running": true,
         "country": null,
-        "gender": null,
+        "gender": 1,
         "room_id": "225074109"
-    },
-    {
-        "site": "StripChat",
-        "username": "bejeni-sweet",
-        "running": true,
-        "country": null,
-        "gender": null,
-        "room_id": "89864150"
     },
     {
         "site": "StripChat",
         "username": "Littlelove66",
         "running": true,
         "country": null,
-        "gender": null,
+        "gender": 1,
         "room_id": "207932011"
     },
     {
@@ -108,7 +100,15 @@
         "username": "dandan_66",
         "running": true,
         "country": null,
-        "gender": null,
+        "gender": 1,
         "room_id": "234601684"
+    },
+    {
+        "site": "StripChat",
+        "username": "YangYang-0805",
+        "running": true,
+        "country": null,
+        "gender": null,
+        "room_id": "266050338"
     }
 ]
